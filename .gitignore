@@ -3,3 +3,7 @@ conll-*/
 *.pyc
 *.log
 *.out
+
+.DS_Store
+.idea
+

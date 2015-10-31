@@ -1,7 +1,7 @@
 {
     "general": {
         "output": "result.out", 
-        "data_dir": "conll-2012/trial/data/english", 
+        "data_dir": "../conll-2012/trial/data/english",
         "suffix": ".conll"
     },
     "params": {
@@ -75,15 +75,15 @@
         }
     }, 
     "dict_files": {
-        "animate": "dict/animate.unigrams.txt",
-        "inanimate": "dict/inanimate.unigrams.txt",
-        "male": "dict/male.unigrams.txt",
-        "female": "dict/female.unigrams.txt",
-        "neutral": "dict/neutral.unigrams.txt",
-        "singular": "dict/singular.unigrams.txt",
-        "plural": "dict/plural.unigrams.txt",
-        "country": "dict/country.abbreviations.txt",
-        "state": "dict/state.abbreviations.txt"
+        "animate": "../dict/animate.unigrams.txt",
+        "inanimate": "../dict/inanimate.unigrams.txt",
+        "male": "../dict/male.unigrams.txt",
+        "female": "../dict/female.unigrams.txt",
+        "neutral": "../dict/neutral.unigrams.txt",
+        "singular": "../dict/singular.unigrams.txt",
+        "plural": "../dict/plural.unigrams.txt",
+        "country": "../dict/country.abbreviations.txt",
+        "state": "../dict/state.abbreviations.txt"
     }, 
     "post_processing": {
         "remove_singletons": true,

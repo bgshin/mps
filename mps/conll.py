@@ -15,7 +15,9 @@ def write(data, output):
     order = []
     for doc in data:
         for part in data[doc]:
-            order.append((doc, part))
+            print part
+            if '(' not in part:
+                order.append((doc, part))
     order.sort()
     for doc, part in order:
         coreference_rendering.print_conll_style_part(
