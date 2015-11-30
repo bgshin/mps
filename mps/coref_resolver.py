@@ -14,6 +14,7 @@ import my_constant
 
 logger = logging.getLogger(__name__)
 
+
 def evaluate(data, eval_, tracking):
     logger.info("Performance of coreference resolution:")
 
@@ -29,10 +30,11 @@ def evaluate(data, eval_, tracking):
     if eval_['coref_bcubed']:
        coref_scorer.calc_bcubed(data)
 
-    if tracking['cluster_errors']:
-        error_analyzer.print_cluster_errors(data)
+    # if tracking['cluster_errors']:
+    #     error_analyzer.print_cluster_errors(data)
 
     return True
+
 
 def merge_clusters(mention, antecedent, pred_ments, pred_clusts):
     m_cluster_id = pred_ments[mention]
@@ -41,6 +43,7 @@ def merge_clusters(mention, antecedent, pred_ments, pred_clusts):
         pred_ments[ment] = a_cluster_id
         pred_clusts[a_cluster_id].append(ment)
     pred_clusts.pop(m_cluster_id)
+
 
 def is_more_representative(m, n, ment_attr):
     # Larger span
@@ -74,6 +77,7 @@ def is_more_representative(m, n, ment_attr):
     else:    
         return False
 
+
 def get_representative_mention(ment, ment_attr, pred_ments, pred_clusts):
     cluster = pred_clusts[pred_ments[ment]]
     cluster_size = len(cluster)
@@ -94,6 +98,7 @@ def get_representative_mention(ment, ment_attr, pred_ments, pred_clusts):
 
     return rment
 
+
 def swap(l, ment_attr):
     # Example
     # (3, 0, 7)      Prince Charles and his new wife Camilla
@@ -110,6 +115,7 @@ def swap(l, ment_attr):
                 l[j], l[i] = l[i], l[j] 
     return l
 
+
 def sort_mentions_for_pronoun(ment, ant_list, ment_attr, sents, trees, heads):
     head_span, head_word, head_pos = \
         coref.mention_head(ment, sents, trees, heads)
@@ -122,8 +128,8 @@ def sort_mentions_for_pronoun(ment, ant_list, ment_attr, sents, trees, heads):
     while tree is not None:
         if tree.label.startswith('S') or tree.parent is None:
             for a in ant_list:
-                if (a not in nodes_to_keep and
-                    tree.span[0] <= a[1] and a[2] <= tree.span[1]):
+                if a not in nodes_to_keep and \
+                                tree.span[0] <= a[1] and a[2] <= tree.span[1]:
                     nodes_to_keep[a] = idx
                     idx += 1 
         tree = tree.parent
@@ -137,12 +143,14 @@ def sort_mentions_for_pronoun(ment, ant_list, ment_attr, sents, trees, heads):
 
     return sorted_ant_list
 
+
 def sub_mention_list(mentions, ment):
     sub = []
     for m in mentions:
         if m[2] <= ment[1]:
             sub.append(m)
     return sub
+
 
 def get_candidate_antecedents(ment, s_i, s_j, doc_ments, ment_attr,
                               sents, trees, heads):

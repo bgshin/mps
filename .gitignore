@@ -7,3 +7,7 @@ conll-*/
 .DS_Store
 .idea
 
+
+*.key
+mps/utils
+reference-coreference-scorers

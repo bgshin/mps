@@ -118,7 +118,7 @@ def find_possessive(mention, text, parses, heads):
 	NP spans should share the same head with NE which is "Papandreou", not "'s".
 	The head finding should perform on the span without "'s".'''
         apostrophe_idx = -1
-	sentence, start, end = mention 
+	sentence, start, end = mention
 	#if text[sentence][end - 1:end][0] in {"'s", "'"}:
 	#	apostrophe_idx = end - 1
 
@@ -205,7 +205,7 @@ PRO_NEUTER = 3
 # Canasai's addition begin
 PRO_ANIMATE = 1
 PRO_INANIMATE = 2
-class Property: 
+class Property:
     gender, number, person, animacy = range(4)
 
     @staticmethod
@@ -239,8 +239,8 @@ class Property:
             animacy = 'inanimate'
 
         return gender, number, person, animacy
-    
-    
+
+
 # Canasai's addition end
 
 def pronoun_properties_text(text):
@@ -283,7 +283,7 @@ def pronoun_properties_text(text):
 			animacy = 'inanimate'
 		# Canasai's addition end
 
-		
+
 	# Canasai's comment out: return gender, number, person
 	return gender, number, person, animacy
 

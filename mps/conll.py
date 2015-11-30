@@ -9,6 +9,7 @@ import coreference_rendering
 
 logger = logging.getLogger(__name__)
 
+
 def write(data, output):
     logger.info("Writing output to [%s]" % output)
     out = codecs.open(output, 'w', 'utf-8') if output else sys.stdout
@@ -25,6 +26,7 @@ def write(data, output):
             doc,  part)
 
     return True 
+
 
 def load_data(dir_prefix, doc_suffix):
     suffix = doc_suffix if doc_suffix else 'auto_conll'     

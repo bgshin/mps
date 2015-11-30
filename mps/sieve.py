@@ -75,7 +75,7 @@ class CoreferenceSystem:
                                 coreference.mention_head(
                                     ment, sents, trees, heads)
                             idx = tree_order[head_span]
-                        print True if (idx == prev_idx) else False
+                        print True if (idx >= prev_idx) else False
                         prev_idx = idx
 
     def extract_all_mentions(self):
@@ -118,13 +118,13 @@ class CoreferenceSystem:
         self.verify_passes()
         self.load_dict()
         self.load_data()
-        self.check_data()
+        # self.check_data()
         self.extract_all_mentions()
-        self.check_ordered_mentions()
+        # self.check_ordered_mentions()
         self.try_coref()
         self.do_post_processing()
-        self.evaluate_extracted_mentions()
-        self.evaluate_coref()
+        # self.evaluate_extracted_mentions()
+        # self.evaluate_coref()
         self.write_docs()
 
 

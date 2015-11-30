@@ -11,11 +11,13 @@ import my_constant
 
 logger = logging.getLogger(__name__)
 
+
 def has_pronoun_property(ment, ment_attr):
     if ment_attr[ment]['type'] == my_constant.MAP_MTYPES['pronoun']:
         return True 
     else:
         return False
+
 
 def exact_match(ment, ant, m_cluster, a_cluster, ment_attr):
     for m in m_cluster:
@@ -33,6 +35,7 @@ def exact_match(ment, ant, m_cluster, a_cluster, ment_attr):
 
     return False
 
+
 def relaxed_exact_match(ment, ant, m_cluster, a_cluster, ment_attr):
     if (has_pronoun_property(ment, ment_attr) or
         has_pronoun_property(ant, ment_attr)):
@@ -49,6 +52,7 @@ def relaxed_exact_match(ment, ant, m_cluster, a_cluster, ment_attr):
 
     return False
 
+
 def cluster_head_match(ment, ant, m_cluster, a_cluster, ment_attr):
     if (has_pronoun_property(ment, ment_attr) or
         has_pronoun_property(ant, ment_attr)):
@@ -59,6 +63,7 @@ def cluster_head_match(ment, ant, m_cluster, a_cluster, ment_attr):
             return True
         
     return False
+
 
 def relaxed_head_match(ment, ant, m_cluster, a_cluster, ment_attr):
     if (has_pronoun_property(ment, ment_attr) or
@@ -73,6 +78,7 @@ def relaxed_head_match(ment, ant, m_cluster, a_cluster, ment_attr):
                 return True
 
     return False
+
 
 def word_inclusion(ment, ant, m_cluster, a_cluster, ment_attr):
     a_set = set()
@@ -90,6 +96,7 @@ def word_inclusion(ment, ant, m_cluster, a_cluster, ment_attr):
     
     return False
 
+
 def compatible_modifiers(ment, ant, m_cluster, a_cluster, ment_attr):
     if not ment_attr[ment]['modifiers'].issubset(ment_attr[ant]['word_list']):
         return False
@@ -101,12 +108,14 @@ def compatible_modifiers(ment, ant, m_cluster, a_cluster, ment_attr):
 
     return True
 
+
 def inside(ment, ant):
     if ment[0] == ant[0]:
         if ment[1] <= ant[1] and ant[2] <= ment[2]:
             return True
 
     return False
+
 
 def iwithini(ment, ant, m_cluster, a_cluster, ment_attr):
     for m in m_cluster:
@@ -115,6 +124,7 @@ def iwithini(ment, ant, m_cluster, a_cluster, ment_attr):
                return False
 
     return True
+
 
 def is_compatible(mention, any_cluster, ment_attr):
     for a in any_cluster:
@@ -143,12 +153,14 @@ def is_compatible(mention, any_cluster, ment_attr):
 
     return True
 
+
 def compatible_properties(ment, ant, m_cluster, a_cluster, ment_attr):
     if not (is_compatible(ment, a_cluster, ment_attr) and
             is_compatible(ant, m_cluster, ment_attr)):
         return False
 
     return True
+
 
 def is_third_person(ment, ment_attr):
     if not (ment_attr[ment]['properties'][coref.Property.person]
@@ -159,6 +171,7 @@ def is_third_person(ment, ment_attr):
     else:
         return False
 
+
 def is_second_person(ment, ment_attr):
     if ment_attr[ment]['properties'][coref.Property.person] == \
        coref.PRO_SECOND:
@@ -166,11 +179,13 @@ def is_second_person(ment, ment_attr):
     else:
         return False
 
+
 def is_first_person(ment, ment_attr):
     if ment_attr[ment]['properties'][coref.Property.person] == coref.PRO_FIRST:
         return True
     else:
         return False
+
 
 def is_pronoun(ment, ment_attr):
     if (ment[2] - ment[1] == 1 and 
@@ -179,6 +194,7 @@ def is_pronoun(ment, ment_attr):
         return True 
     else:
         return False
+
 
 def skip_pronoun_match(ment, ant, ment_attr):
     if not is_pronoun(ment, ment_attr):
@@ -205,14 +221,17 @@ def skip_pronoun_match(ment, ant, ment_attr):
 
     return False
 
+
 def pronoun_match(ment, ant, m_cluster, a_cluster, ment_attr):
     if skip_pronoun_match(ment, ant, ment_attr):
        return False
 
     return True
 
+
 def make_pair(id1, id2):
     return (min(id1, id2), max(id1, id2))
+
 
 def skip_pair(rment, ment, ant, ment_cluster_id, ant_cluster_id,
               m_cluster, a_cluster, ment_attr, incompatible_clusters):
@@ -226,6 +245,7 @@ def skip_pair(rment, ment, ant, ment_cluster_id, ant_cluster_id,
     if (incompatible_clusters is not None and
         cluster_id_pair in incompatible_clusters):
         return True 
+
 
 def is_coref(rules, rment, ment, ant, ment_attr, pred_ments,
              pred_clusts, incompatible_clusters):
@@ -251,6 +271,7 @@ def is_coref(rules, rment, ment, ant, ment_attr, pred_ments,
             return False
 
     return  True
+
 
 def verify_passes(passes):
     for i in xrange(len(passes)):
