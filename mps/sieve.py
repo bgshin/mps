@@ -118,13 +118,13 @@ class CoreferenceSystem:
         self.verify_passes()
         self.load_dict()
         self.load_data()
-        # self.check_data()
+        self.check_data()
         self.extract_all_mentions()
-        # self.check_ordered_mentions()
+        self.check_ordered_mentions()
         self.try_coref()
         self.do_post_processing()
-        # self.evaluate_extracted_mentions()
-        # self.evaluate_coref()
+        self.evaluate_extracted_mentions()
+        self.evaluate_coref()
         self.write_docs()
 
 
