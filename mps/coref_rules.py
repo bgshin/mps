@@ -71,13 +71,27 @@ def relaxed_head_match(ment, ant, m_cluster, a_cluster, ment_attr):
         return False
 
     if (ment_attr[ment]['ner'] != 'O' and
-        ment_attr[ant]['ner'] != 'O' and
-        ment_attr[ment]['ner'] == ment_attr[ant]['ner']):
-        if (ment_attr[ment]['head_word'] in ment_attr[ant]['word_list'] or
-            ment_attr[ant]['head_word'] in ment_attr[ment]['word_list']):
+            ment_attr[a]['ner'] != 'O' and
+            ment_attr[ment]['ner'] == ment_attr[ant]['ner']):
+        for a in a_cluster:
+            if (ment_attr[ment]['head_word'] in ment_attr[a]['word_list']):
                 return True
 
     return False
+
+# def relaxed_head_match(ment, ant, m_cluster, a_cluster, ment_attr):
+#     if (has_pronoun_property(ment, ment_attr) or
+#         has_pronoun_property(ant, ment_attr)):
+#         return False
+#
+#     if (ment_attr[ment]['ner'] != 'O' and
+#         ment_attr[ant]['ner'] != 'O' and
+#         ment_attr[ment]['ner'] == ment_attr[ant]['ner']):
+#         if (ment_attr[ment]['head_word'] in ment_attr[ant]['word_list'] or
+#             ment_attr[ant]['head_word'] in ment_attr[ment]['word_list']):
+#                 return True
+#
+#     return False
 
 
 def word_inclusion(ment, ant, m_cluster, a_cluster, ment_attr):
