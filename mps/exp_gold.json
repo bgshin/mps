@@ -1,6 +1,6 @@
 {
     "general": {
-        "output": "s6.gold.noplurals.system",
+        "output": "s6.relaxhead.gold.system",
         "data_dir": "../conll-2012-gold/english/data/test/data/english/annotations/",
         "suffix": ".v4_gold_conll"
     },
@@ -10,7 +10,7 @@
         "remove_conll_spurious_mentions": true,
         "max_sent_dist": -1,
         "skip_indefinite_article": true,
-        "skip_bare_plurals": false,
+        "skip_bare_plurals": true,
         "skip_disagreed_parse_ne": false
     },
     "tracking": {
