@@ -11,3 +11,5 @@ conll-*/
 *.key
 mps/utils
 reference-coreference-scorers
+
+*.txt
