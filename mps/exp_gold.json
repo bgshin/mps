@@ -1,6 +1,6 @@
 {
     "general": {
-        "output": "s6.relaxhead.gold.system",
+        "output": "s6.represent.gold.system",
         "data_dir": "../conll-2012-gold/english/data/test/data/english/annotations/",
         "suffix": ".v4_gold_conll"
     },
