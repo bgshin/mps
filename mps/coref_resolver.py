@@ -44,38 +44,90 @@ def merge_clusters(mention, antecedent, pred_ments, pred_clusts):
         pred_clusts[a_cluster_id].append(ment)
     pred_clusts.pop(m_cluster_id)
 
-
 def is_more_representative(m, n, ment_attr):
     # Larger span
-    if ment_attr[m]['head_idx'] - m[0] > ment_attr[n]['head_idx'] - n[0]:
+    ret_val = True
+
+    if (ment_attr[m]['head_pos'] in ['NNP', 'NNPS'])==True and (ment_attr[n]['head_pos'] in ['NNP', 'NNPS'])==False:
         return True
-    else:    
+
+    if (ment_attr[m]['surface'] in coref.pronoun_properties)==False and (ment_attr[n]['surface'] in coref.pronoun_properties)==True:
+        return True
+
+    if (m[2]-m[1])>=(n[2]-n[1]):
+        return True
+    else:
         return False
 
-    #  Earlier sentence
-    if m[0] < n[0]:
-        return True
-    else:   
-        return False
+    # if (ment_attr[m]['head_word'] in coref.pronoun_properties)==True and (ment_attr[n]['head_word'] in coref.pronoun_properties)==False:
+    #     ret_val=True
+    #     return ret_val
+    # else:
+    #     ret_val=False
 
-    # Earlier head
-    if m[0] == n[0] and ment_attr[m]['head_idx'] < ment_attr[n]['head_idx']:
-        return True
-    else:    
-        return False
 
-    # Short mentions, take longer
-    if (len(ment_attr[m]['word_list']) <= 5 and
-        len(ment_attr[m]['word_list']) > len(ment_attr[n]['word_list'])):
-        return True
-    else:    
-        return False
 
-    # Long mentions, take shorter
-    if len(ment_attr[m]['word_list']) < len(ment_attr[n]['word_list']):
-        return True
-    else:    
-        return False
+
+
+    #
+    # #  Earlier sentence
+    # if m[0] < n[0]:
+    #     return True
+    # else:
+    #     return False
+    #
+    # # Earlier head
+    # if m[0] == n[0] and ment_attr[m]['head_idx'] < ment_attr[n]['head_idx']:
+    #     return True
+    # else:
+    #     return False
+    #
+    # # Short mentions, take longer
+    # if (len(ment_attr[m]['word_list']) <= 5 and
+    #     len(ment_attr[m]['word_list']) > len(ment_attr[n]['word_list'])):
+    #     return True
+    # else:
+    #     return False
+    #
+    # # Long mentions, take shorter
+    # if len(ment_attr[m]['word_list']) < len(ment_attr[n]['word_list']):
+    #     return True
+    # else:
+    #     return False
+
+
+
+# def is_more_representative(m, n, ment_attr):
+#     # Larger span
+#     if ment_attr[m]['head_idx'] - m[0] > ment_attr[n]['head_idx'] - n[0]:
+#         return True
+#     else:
+#         return False
+#
+#     #  Earlier sentence
+#     if m[0] < n[0]:
+#         return True
+#     else:
+#         return False
+#
+#     # Earlier head
+#     if m[0] == n[0] and ment_attr[m]['head_idx'] < ment_attr[n]['head_idx']:
+#         return True
+#     else:
+#         return False
+#
+#     # Short mentions, take longer
+#     if (len(ment_attr[m]['word_list']) <= 5 and
+#         len(ment_attr[m]['word_list']) > len(ment_attr[n]['word_list'])):
+#         return True
+#     else:
+#         return False
+#
+#     # Long mentions, take shorter
+#     if len(ment_attr[m]['word_list']) < len(ment_attr[n]['word_list']):
+#         return True
+#     else:
+#         return False
 
 
 def get_representative_mention(ment, ment_attr, pred_ments, pred_clusts):
